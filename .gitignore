@@ -1,0 +1,30 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment files
+.env
+.env.*
+
+# Test and report artifacts
+allure-report/
+allure-results/
+reports/
+htmlcov/
+.coverage
+
+# Editor/IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
