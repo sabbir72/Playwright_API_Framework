@@ -1,4 +1,5 @@
 from api.api_client import APIClient
+from api.auth_api import AuthAPI
 from utils.logger import logger
 
 import json
@@ -38,8 +39,9 @@ import json
 
 def test_api_key_authentication():
     client = APIClient()
+    auth_api = AuthAPI(client)
 
-    response = client.get("/api/users/")
+    response = auth_api.get_authenticated_user()
 
     # print part=====================================================
 

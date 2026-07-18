@@ -1,0 +1,23 @@
+[32mINFO    [0m utils.logger:test_users.py:16 ==================================================
+[32mINFO    [0m utils.logger:test_users.py:17 CREATE USER API
+[32mINFO    [0m utils.logger:test_users.py:18 Status Code: 201
+[32mINFO    [0m utils.logger:test_users.py:19 Response Body: 
+{
+    "name": "Samir",
+    "job": "Lead SQA",
+    "id": "928",
+    "createdAt": "2026-07-18T15:33:47.086Z",
+    "_meta": {
+        "powered_by": "ReqRes",
+        "docs_url": "https://app.reqres.in/documentation",
+        "upgrade_url": "https://app.reqres.in/upgrade",
+        "example_url": "https://app.reqres.in/examples/notes-app",
+        "variant": "v1_a",
+        "message": "Your data persists here. Add auth, logs, and custom schemas to build a real backend.",
+        "cta": {
+            "label": "See example app",
+            "url": "https://app.reqres.in/examples/notes-app"
+        },
+        "context": "legacy_success"
+    }
+}

@@ -1,0 +1,2 @@
+INFO     utils.logger:test_users.py:52 PATCH USER API
+INFO     utils.logger:test_users.py:53 Status Code: 200

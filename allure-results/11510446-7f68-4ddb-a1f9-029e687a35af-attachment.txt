@@ -1,0 +1,2 @@
+[32mINFO    [0m utils.logger:test_users.py:67 DELETE USER API
+[32mINFO    [0m utils.logger:test_users.py:68 Status Code: 204

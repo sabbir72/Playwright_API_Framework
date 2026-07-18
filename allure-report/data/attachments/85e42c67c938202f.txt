@@ -1,0 +1,2 @@
+INFO     utils.logger:test_users.py:36 UPDATE USER API
+INFO     utils.logger:test_users.py:37 Status Code: 200
