@@ -7,6 +7,7 @@ load_dotenv()
 # Read Base URL
 BASE_URL = os.getenv("BASE_URL")
 TIMEOUT = int(os.getenv("TIMEOUT", 30000))
+# ReqRes API Key for testing
 REQRES_API_KEY = os.getenv("REQRES_API_KEY")
 
 
