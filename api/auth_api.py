@@ -1,5 +1,13 @@
 
 from api.api_client import APIClient
+from utils.config import BASE_URL
+
+
+
+
+
+
+# for base url=====================================
 
 class AuthAPI:
     """Authentication-related ReqRes API operations."""
@@ -8,7 +16,5 @@ class AuthAPI:
         self.client = client
 
     def login(self, payload):
-        return self.client.post("/api/login", payload)
-
-    # def get_authenticated_user(self, user_id=2):
-    #     return self.client.get(f"/api/users/{user_id}")
+        return self.client.post(f"{BASE_URL}/auth/login", payload)  
+    

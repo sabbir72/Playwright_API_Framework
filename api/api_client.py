@@ -1,51 +1,26 @@
 from playwright.sync_api import sync_playwright
-from utils.config import BASE_URL, REQRES_API_KEY, TIMEOUT
+from utils.config import BASE_URL, TIMEOUT
 
 
-class APIClient:
 
+
+
+class APIClient: 
     def __init__(self):
-        self.playwright = sync_playwright().start()
-        self.request = self.playwright.request.new_context(
-            base_url=BASE_URL,
-            timeout=TIMEOUT,
-        )
+       self.playwright = sync_playwright().start()
+       self.request = self.playwright.request.new_context(
+           base_url=BASE_URL,
+           timeout=TIMEOUT
+       )
 
-    # @staticmethod
-    def _default_headers(self):
-        headers = {"X-Reqres-Env": "prod"}
-
-        if REQRES_API_KEY:
-            headers["x-api-key"] = REQRES_API_KEY
-        return headers
-
-    # def get(self, endpoint):
-    #     return self.request.get(endpoint, headers=self._default_headers())
+    def get(self, endpoint):
+        return self.request.get(endpoint)
+    
 
     def post(self, endpoint, data):
-        return self.request.post(
-            endpoint,
-            data=data,
-            headers=self._default_headers(),
-        )
-
-    # def put(self, endpoint, data):
-    #     return self.request.put(
-    #         endpoint,
-    #         data=data,
-    #         headers=self._default_headers(),
-    #     )
-
-    # def patch(self, endpoint, data):
-    #     return self.request.patch(
-    #         endpoint,
-    #         data=data,
-    #         headers=self._default_headers(),
-    #     )
-
-    # def delete(self, endpoint):
-    #     return self.request.delete(endpoint, headers=self._default_headers())
-
+        return self.request.post(endpoint, data=data)   
+    
     def close(self):
-    #     self.request.dispose()
+        self.request.dispose()
         self.playwright.stop()
+
