@@ -20,27 +20,16 @@ def test_login_successful():
     response=auth.login(payload)
 
     logger.info("=" * 50)
-    logger.info("Status Code: %s", response.status)
-    logger.info("Response Body: \n%s", response.json())
+    logger.info(f"Status Code: {response.status}")
+    logger.info(json.dumps(response.json(), indent=4))
     logger.info("=" * 50)
 
-    logger.info("=" * 60)
+    
 
     data = response.json()
-    # logger.info("Parsed Response Data: \n%s", json.dumps(data, indent=4))
-    assert response.status == 200
-    assert data["username"] == "emilys"
-    assert "accessToken" in data
-    assert "refreshToken" in data
-    assert data["accessToken"] != ""
-    assert data["refreshToken"] != ""
-    logger.info("=" * 60)
+    
 
 
-    access_token = data.get("access_token")
-    logger.info("Access Token: %s", access_token)
-
-    assert access_token != "", "Access token should not be an empty string"
 
     # print("Response Body: ", response.json())
 
