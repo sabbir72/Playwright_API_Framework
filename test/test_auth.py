@@ -21,7 +21,7 @@ def test_get_current_user(api_client, auth_token):
         print("=" * 50)
         print(f"\nStatus Code: {response.status}")
         print(f"\nResponse: {json.dumps(response.json(), indent=4)}")
-        print("auth_token:", auth_token)
+       
 
     with allure.step("Verify response status code"):
         assert response.status == 200
