@@ -12,7 +12,7 @@ class UserAPI:
 
         logger. info ("getting all users")
 
-        params = {  }
+        params = { }
 
         if limit is not None:
             params["limit"] = limit

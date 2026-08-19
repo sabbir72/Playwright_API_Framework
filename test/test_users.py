@@ -2,35 +2,29 @@ import allure
 
 from api.user_api import UserAPI
 
-@allure.feature("User")
-@allure.story("Get al user")
 
-def test_get_all_user(api_client):
+@allure.feature("Users")
+@allure.story("Get All Users")
+def test_get_all_users(api_client):
 
-    user_api=UserAPI(api_client)
-
-    user_id=1
+    user_api = UserAPI(api_client)
 
     with allure.step("Get all users"):
-        response=user_api.get_users(user_id)
 
-        print("Status code:", response.status)
+        response = user_api.get_users()
 
-        body=response.json()
+    print("Status Code:", response.status)
 
-        print("Total users:", body["total"])
-        print("Users Returned:", len(body["users"]))
+    body = response.json()
 
-        assert response.status == 200
+    print("Total Users:", body["total"])
+    print("Users Returned:", len(body["users"]))
 
-        assert "users" in body
-        assert "total" in body
-        assert "skip" in body
-        assert "limit" in body
+    assert response.status == 200
 
-        assert len(body["users"]) > 0
+    assert "users" in body
+    assert "total" in body
+    assert "skip" in body
+    assert "limit" in body
 
-
-
-
-
+    assert len(body["users"]) > 0
