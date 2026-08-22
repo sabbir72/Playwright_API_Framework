@@ -1,0 +1,6 @@
+[32mINFO    [0m api.api_client:api_client.py:17 API Client initialized
+[32mINFO    [0m api.user_api:user_api.py:75 Deleting user with ID: abc
+[32mINFO    [0m api.api_client:api_client.py:51 DELETE Request: /users/abc
+[32mINFO    [0m api.api_client:api_client.py:55 DELETE Response: 400
+[32mINFO    [0m api.user_api:user_api.py:80 Delete User API Status Code : {400}
+[32mINFO    [0m api.api_client:api_client.py:61 Closing API Client

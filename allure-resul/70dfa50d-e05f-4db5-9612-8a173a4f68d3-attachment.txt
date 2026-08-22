@@ -1,0 +1,2 @@
+[32mINFO    [0m api.api_client:api_client.py:17 API Client initialized
+[32mINFO    [0m api.api_client:api_client.py:61 Closing API Client
