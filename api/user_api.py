@@ -51,4 +51,32 @@ class UserAPI:
 
 
 
+    #==========================================
+
+    def create_user(self, payload):
+        logger.info("Creating a new user")
+
+        response = self.api_client.post("/users/add", data=payload)
+
+        logger.info(f"Create User API Status Code : %s", {response.status})
+
+        return response
+
+    def update_user(self,user_id, payload):
+        logger.info(f"Updating user with ID: {user_id}")
+
+        response = self.api_client.put(f"/users/{user_id}", data=payload)
+
+        logger.info(f"Update User API Status Code : %s", {response.status})
+
+        return response
+
+    def delete_user(self, user_id):
+        logger.info(f"Deleting user with ID: {user_id}")
+
+        response = self.api_client.delete(f"/users/{user_id}")
         
+
+        logger.info(f"Delete User API Status Code : %s", {response.status})
+        return response
+    

@@ -6,7 +6,7 @@ def test_get_single_user(api_client):
 
     user_api = UserAPI(api_client)
 
-    user_id = 10
+    user_id = 999999
 
     with allure.step("Get user by ID"):
 
