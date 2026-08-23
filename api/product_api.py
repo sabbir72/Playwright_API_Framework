@@ -17,3 +17,22 @@ class ProductAPI:
         logger.info(f"Get Product API Status Code: {response.status}")
 
         return response
+
+
+    def get_all_products(self, limit=None, skip=None):
+
+        params = {}
+
+        if limit is not None:
+            params["limit"] = limit
+
+        if skip is not None:
+            params["offset"] = skip
+
+        logger.info(f"Getting all products with params: {params}")
+
+        response = self.api_client.get("/products", params=params)
+
+        logger.info(f"Get All Products API Status Code: {response.status}")
+
+        return response

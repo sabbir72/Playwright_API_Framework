@@ -38,3 +38,71 @@ def test_get_product(api_client):
     with allure.step("Validate product category"):
 
         assert "category" in body
+
+
+
+@allure.feature("Products")
+@allure.story("Get All Products")
+def test_get_all_products(api_client):
+
+    product_api = ProductAPI(api_client)
+
+    with allure.step("Get all products"):
+
+        response = product_api.get_all_products(limit=5, skip=0)
+
+    print("Status Code:", response.status)
+
+    body = response.json()
+
+    print("All Products Response:", body)
+
+    with allure.step("Validate status code"):
+
+        assert response.status == 200
+
+        allure.attach(
+            str(body["products"]),
+            name="Products List",
+            attachment_type=allure.attachment_type.TEXT
+        )
+    # with allure.step("Validate response body is a list"):
+        
+    #     assert isinstance(body, list)
+
+    with allure.step("Validate each product has required fields"):
+        assert "products" in body
+        allure.attach(
+            str(body["products"]),
+            name="Products List",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+    with allure.step("Validate skip field"):
+        assert "total" in body
+
+        allure.attach(
+            str(body["total"]),
+            name="Total Products",
+            attachment_type=allure.attachment_type.TEXT
+
+        )
+        assert "skip" in body
+
+        allure.attach(
+            str(body["skip"]),
+            name="Skip Value",
+            attachment_type=allure.attachment_type.JSON
+        )
+
+    with allure.step("Validate limit field"):
+        assert "limit" in body
+    with allure.step("Validate products field is a list"):
+        assert isinstance(body["products"], list)
+
+    with allure.step("Validate number of products returned"):
+
+        assert len(body["products"]) <= 5
+
+    with allure.step("Validate total"):
+        assert body["total"] > 0
