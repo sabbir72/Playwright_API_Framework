@@ -39,7 +39,9 @@ def test_get_product(api_client):
 
         assert "category" in body
 
+# ================================================================
 
+# ================================================================
 
 @allure.feature("Products")
 @allure.story("Get All Products")
@@ -106,3 +108,83 @@ def test_get_all_products(api_client):
 
     with allure.step("Validate total"):
         assert body["total"] > 0
+
+
+# ================================================================
+
+# ================================================================
+
+@allure.feature("Products")
+@allure.story("Search Product")
+
+def test_search_product(api_client):
+
+    product_api = ProductAPI(api_client)
+
+    search_query="laptop"
+
+    with allure.step("\n Search for products with query 'laptop'"):
+
+        response = product_api.search_product("laptop")
+
+    print("Status Code:", response.status)
+
+    body = response.json()
+
+    print("\n" + "=" * 50)
+    print("SEARCH PRODUCTS RESPONSE")
+    print("=" * 50)
+
+    print(f"\nSearch Products Response : {body}")
+
+    print(f"\nStatus Code              : {response.status}")
+
+    print(f"\nSearch Query             : {search_query}")
+
+    print(f"\nTotal Results            : {body['total']}")
+
+    print(f"\nProducts                 : {body['products']}")
+
+    print("=" * 50)
+
+    with allure.step("\n Validate status code"):
+
+        assert response.status == 200
+
+    with allure.step("\n Validate Products Field"):
+
+        assert "products" in body
+
+    with allure.step("\n Validate Total Field"):
+
+        assert "total" in body
+
+    with allure.step("\n Validate Search Results"):
+
+        assert len(body["products"]) > 0
+
+
+
+    with allure.step(" \n Validate search results contain products"):
+
+        assert "products" in body
+
+        allure.attach(
+            str(body["products"]),
+            name="Search Results",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+    with allure.step("\n Validate each product has required fields"):
+
+        for product in body["products"]:
+            assert "id" in product
+            assert "title" in product
+            assert "price" in product
+            assert "category" in product
+
+            print(
+                 f"Product ID: {product["id"]} | "
+                 f"Title : {product["title"]}"
+
+            )

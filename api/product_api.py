@@ -36,3 +36,15 @@ class ProductAPI:
         logger.info(f"Get All Products API Status Code: {response.status}")
 
         return response
+
+
+
+
+    def search_product(self, query):
+        logger.info(f"Searching for products with query: {query}")
+
+        response = self.api_client.get("/products/search", params={"q": query})
+
+        logger.info(f"Search Product API Status Code: {response.status}")
+
+        return response
