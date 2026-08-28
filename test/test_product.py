@@ -123,9 +123,9 @@ def test_search_product(api_client):
 
     search_query="laptop"
 
-    with allure.step("\n Search for products with query 'laptop'"):
+    with allure.step("\n Search for products with query {search_query}"):
 
-        response = product_api.search_product("laptop")
+        response = product_api.search_product(search_query)
 
     print("Status Code:", response.status)
 
@@ -163,8 +163,6 @@ def test_search_product(api_client):
 
         assert len(body["products"]) > 0
 
-
-
     with allure.step(" \n Validate search results contain products"):
 
         assert "products" in body
@@ -185,6 +183,150 @@ def test_search_product(api_client):
 
             print(
                  f"Product ID: {product["id"]} | "
-                 f"Title : {product["title"]}"
+                 f"Title : {product["title"]} | "
+                 f"price : {product ["price"]}"
 
             )
+
+    # =========================================
+
+    # =========================================
+
+    @allure .feature(product)
+    @allure.story("Create product")
+
+    def test_create_product(api_client):
+
+        product_api=ProductAPI(api_client)
+
+        payload = {"title": "QA Test Product", "price": 99.99, "category": "beauty"}
+
+        with allure.step("Prepare product payload"):
+
+            print("Create Product Payload:", payload)
+
+            allure.attach(
+                str(payload),
+                name="Create Product Payload",
+                attachment_type=allure.attachment_type.TEXT,
+            )
+
+        with allure.step("Create product"):
+
+            response = product_api.create_product(payload)
+
+        print("Status Code:", response.status)
+
+        body = response.json()
+
+        print("Create Product Response:", body)
+
+        with allure.step("Validate Status Code"):
+
+            assert response.status == 201
+
+        with allure.step("Validate Product ID"):
+
+            assert "id" in body
+            assert body["id"] is not None
+
+        with allure.step("Validate Product Title"):
+
+            assert body["title"] == payload["title"]
+
+        with allure.step("Validate Product Price"):
+
+            assert body["price"] == payload["price"]
+
+        with allure.step("Validate Product Category"):
+
+            assert body["category"] == payload["category"]
+# =============================================================
+
+# =============================================================
+
+@allure.feature("Products")
+@allure.story("Update Product")
+def test_update_product(api_client):
+
+    product_api = ProductAPI(api_client)
+
+    product_id = 1
+
+    update_payload = {"title": "Updated QA Product", "price": 149.99}
+
+    with allure.step("Prepare update payload"):
+
+        print("Update Payload:", update_payload)
+
+        allure.attach(
+            str(update_payload),
+            name="Update Product Payload",
+            attachment_type=allure.attachment_type.TEXT,
+        )
+
+    with allure.step(f"Update product with ID: {product_id}"):
+
+        response = product_api.update_product(product_id, update_payload)
+
+    print("Status Code:", response.status)
+
+    body = response.json()
+
+    print("Update Response:", body)
+
+    with allure.step("Validate Status Code"):
+
+        assert response.status == 200
+
+    with allure.step("Validate Product ID"):
+
+        assert body["id"] == product_id
+
+    with allure.step("Validate Updated Title"):
+
+        assert body["title"] == update_payload["title"]
+
+    with allure.step("Validate Updated Price"):
+
+        assert body["price"] == update_payload["price"]
+
+
+# ===========================================
+
+# ===========================================
+
+
+@allure.feature("Products")
+@allure.story("Delete Product")
+def test_delete_product(api_client):
+
+    product_api = ProductAPI(api_client)
+
+    product_id = 1
+
+    with allure.step(f"Delete product with ID: {product_id}"):
+
+        response = product_api.delete_product(product_id)
+
+    print("Delete Status Code:", response.status)
+
+    body = response.json()
+
+    print("Delete Response:", body)
+
+    with allure.step("Validate Status Code"):
+
+        assert response.status == 200
+
+    with allure.step("Validate Deleted Product ID"):
+
+        assert body["id"] == product_id
+
+    with allure.step("Validate Deleted Flag"):
+
+        assert body.get("isDeleted") is True
+
+    with allure.step("Validate Deleted Date"):
+
+        assert "deletedOn" in body

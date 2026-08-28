@@ -48,3 +48,49 @@ class ProductAPI:
         logger.info(f"Search Product API Status Code: {response.status}")
 
         return response
+
+
+
+    def create_product(self, paylaod):
+
+        logger.info("create a new product")
+        logger.info(f"Create product payload:{paylaod}")
+
+        response=self.api_client.post("/products/add", data=paylaod)
+
+        logger.info(f"Create product api status code :{response.status}")
+
+        return response
+
+
+
+    def update_product(self, product_id, payload):
+
+        logger.info(f" updating product with ID: {product_id}")
+
+
+        logger.info(f"updating product payload: {payload}")
+
+        response=self.api_client.put(
+            f"/products/{product_id}",
+            data=payload
+        )
+
+        logger.info(f"update product api status code: {response.status}")
+
+        return response
+
+
+
+    def delete_product(self,product_id):
+            logger.info(f"Deleting product: {product_id}")
+
+            response=self.api_client.delete(
+                f"/products/{product_id}"
+            )
+
+            logger.info(f"Delete product status code:{response.status} ")
+            return response
+
+
+        
