@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 from api.product_api import ProductAPI
 
@@ -35,3 +36,47 @@ def test_search_product_no_result(api_client):
     with allure.step("Validate Products List Empty"):
 
         assert body["products"] == []
+
+
+#=========================================
+
+#=========================================
+
+
+
+@pytest.mark.parametrize(
+    "product_id",
+    [-1, 0, 99999, "abc"]
+)
+@allure.feature("Products")
+@allure.story("Delete Product - Negative")
+def test_delete_invalid_product(
+    api_client,
+    product_id
+):
+
+    product_api = ProductAPI(api_client)
+
+    with allure.step(
+        f"Delete invalid product ID: {product_id}"
+    ):
+
+        response = product_api.delete_product(
+            product_id
+        )
+
+    print(
+        f"Product ID: {product_id}"
+    )
+
+    print(
+        f"Status Code: {response.status}"
+    )
+
+    print(
+        f"Response: {response.text()}"
+    )
+
+    with allure.step("Validate Error Response"):
+
+        assert response.status in [400, 404]

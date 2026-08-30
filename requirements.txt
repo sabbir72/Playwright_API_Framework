@@ -4,3 +4,8 @@ pytest-playwright
 allure-pytest
 jsonschema
 python-dotenv
+
+
+
+"username": "emilys",
+    "password": "emilyspass"

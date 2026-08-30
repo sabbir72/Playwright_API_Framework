@@ -13,7 +13,7 @@ class AuthAPI:
 
     def login(self,payload):
         logger.info("Starting Login API")
-        response = self.api_client.post("/auth/login", data=payload)
+        response = self.api_client.post("/login", data=payload)
         logger.info(f"Login API Status Code : %s", response.status)
         return response
 
